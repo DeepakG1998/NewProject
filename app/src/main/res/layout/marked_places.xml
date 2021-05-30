@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MarkedPlacesActivity">
+
+    <LinearLayout
+        android:id="@+id/dummy"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:padding="10dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_of_marked_places"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:shadowColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/listThePlaces"
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/viewInMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view"
+            android:padding="20sp"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/DeleteList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:padding="20sp"/>
+        <Button
+            android:id="@+id/HomeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:text="@string/home"
+            android:padding="20sp"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
