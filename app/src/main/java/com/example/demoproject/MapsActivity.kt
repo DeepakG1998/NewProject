@@ -16,34 +16,31 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback  , LocationListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener {
 
-    private lateinit var map: GoogleMap
-
-
+    private var map: GoogleMap? = null
     private val LOCATION_PERMISSION_REQUEST = 1
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_maps)
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.mapp) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
 
-    //get access from Location
     private fun getLocationAccess() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            map.isMyLocationEnabled = true
-        }
-        else
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            map?.isMyLocationEnabled = true
+        } else
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST
             )
     }
 
-
-
-    //Request permission to access the location
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -58,80 +55,37 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback  , LocationListener
                     ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                         this,
                         Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     return
                 }
-                map.isMyLocationEnabled = true
-            }
-            else {
-                Toast.makeText(
-                    this,
-                    "User has not granted location access permission",
-                    Toast.LENGTH_LONG
-                ).show()
+                map?.isMyLocationEnabled = true
+            } else {
+                Toast.makeText(this, "User has not granted location access permission", Toast.LENGTH_LONG).show()
                 finish()
             }
         }
     }
 
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.mapp) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
-
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-
-
-
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getLocationAccess()
-        map.uiSettings.isZoomControlsEnabled=true
+        map?.uiSettings?.isZoomControlsEnabled = true
 
-
-
-        //Listener for marker and create new activity
-        map.setOnMapClickListener { latlng ->
-
-
-            // Clears the previously touched position
-            map.clear()
-            val location = LatLng(latlng.latitude, latlng.longitude)
-            map.addMarker(MarkerOptions().position(location))
+        map?.setOnMapClickListener {
+            map?.clear()
+            val location = LatLng(it.latitude, it.longitude)
+            map?.addMarker(MarkerOptions().position(location))
+            val lat: Double = it.latitude
+            val lng: Double = it.longitude
             val intent = Intent(this, NameDescriptionActivity::class.java)
+            intent.putExtra("latitude", lat)
+            intent.putExtra("longitude", lng)
             startActivity(intent)
-            val mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
-            mDatabase.child("heroes").child("latlong").setValue(latlng.latitude, latlng.longitude)
-
         }
-
     }
 
     override fun onLocationChanged(p0: Location) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, "Location Changed!!", Toast.LENGTH_LONG).show()
     }
 }

@@ -11,25 +11,13 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
-class OtpVerification : AppCompatActivity() {
-
-
-    lateinit var auth: FirebaseAuth
-
-
+class OTPVerificationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.otp_verification)
-
-
-        auth=FirebaseAuth.getInstance()
-
+        setContentView(R.layout.activity_verification)
 
         val storedVerificationId= intent.getStringExtra("storedVerificationId")
-
-
-
         findViewById<Button>(R.id.login).setOnClickListener {
             val otp = findViewById<EditText>(R.id.et_otp).text.trim().toString()
             if(otp.isNotEmpty()){
@@ -42,10 +30,8 @@ class OtpVerification : AppCompatActivity() {
         }
     }
 
-
-
-
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        val auth=FirebaseAuth.getInstance()
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -54,7 +40,6 @@ class OtpVerification : AppCompatActivity() {
                     finish()
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
                         Toast.makeText(this,"Invalid OTP", Toast.LENGTH_SHORT).show()
                     }
                 }

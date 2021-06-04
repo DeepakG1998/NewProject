@@ -12,7 +12,6 @@
     <string name="verify">Verify</string>
     <string name="welcome_to_the_warmodroid_tutorial">Welcome to the Warmodroid Tutorial</string>
     <string name="welcome_to_the_Mapview" />
-    <string name="enter_otp">Enter OTP</string>
     <string name="send_otp">Send OTP</string>
     <string name="didn_t_get_opt_resend">Did\'t get OPT? <b>Resend</b></string>
     <string name="please_enter_the_verification_code_to_91_xxxxxxxxxx">Please enter the verification code to +91-XXXXXXXXXX</string>
@@ -33,6 +32,9 @@
     <string name="delete">Delete</string>
     <string name="home">Home</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="enter_otp">Enter OTP</string>
     <string name="login">Login</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="name">Name :</string>
+    <string name="kkah">kkah</string>
+    <string name="discription">Discription :</string>
 </resources>

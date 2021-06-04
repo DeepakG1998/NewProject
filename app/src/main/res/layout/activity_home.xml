@@ -15,7 +15,6 @@
         android:layout_marginTop="250dp"
         android:orientation="vertical">
 
-
         <Button
             android:id="@+id/markThePlaceBtn"
             android:layout_width="match_parent"

@@ -5,32 +5,26 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.home_page.*
-import kotlinx.android.synthetic.main.marked_places.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 
-class HomeActivity: AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_page)
+        setContentView(R.layout.activity_home)
 
-
-
-        //Button for set the marker
-        markThePlaceBtn.setOnClickListener{
+        markThePlaceBtn.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
 
-
-
-        //Button for see the Marked list
-        showMarkedPlacesBtn.setOnClickListener{
-            val intent = Intent(this@HomeActivity, MarkedPlacesActivity::class.java)
+        showMarkedPlacesBtn.setOnClickListener {
+            val intent = Intent(this, SavedListActivity::class.java)
             startActivity(intent)
         }
 
-    }}
+    }
+}
 

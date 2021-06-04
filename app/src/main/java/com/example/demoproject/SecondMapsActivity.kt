@@ -13,7 +13,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
+class SecondMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
 
@@ -26,12 +26,10 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-
         mMap?.clear()
         mMap?.uiSettings?.isZoomControlsEnabled ?:true
 
         val ref = FirebaseDatabase.getInstance().reference.child("Places with Location")
-
         ref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(database: DataSnapshot) {
@@ -39,9 +37,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
                     val latitude1 = pullRequest.child("latitude").value
                     val longitude1 = pullRequest.child("longitude").value
                     val location2 = LatLng(latitude1 as Double, longitude1 as Double)
-                    mMap?.addMarker(
-                        MarkerOptions().position(location2)
-                    )
+                    mMap?.addMarker(MarkerOptions().position(location2))
                 }
             }
 
