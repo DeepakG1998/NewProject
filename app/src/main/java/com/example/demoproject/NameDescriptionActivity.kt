@@ -28,7 +28,7 @@ class NameDescriptionActivity : AppCompatActivity() {
         val longitude = intent.getDoubleExtra("longitude", 0.0)
         val name1 = editTextName1.text.toString().trim()
         val name2=editTextDescription1.text.toString().trim()
-        if (name1.isEmpty() && name2.isEmpty() && latitude != null && longitude != null) {
+        if (name1.isEmpty() && name2.isEmpty()) {
             editTextName1.error = "Please Enter Name"
             return
         }
