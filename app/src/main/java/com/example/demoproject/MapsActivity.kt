@@ -21,7 +21,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener {
 
     private var map: GoogleMap? = null
-    private val LOCATION_PERMISSION_REQUEST = 1
+    companion object{
+        private const val LOCATION_PERMISSION_REQUEST = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
